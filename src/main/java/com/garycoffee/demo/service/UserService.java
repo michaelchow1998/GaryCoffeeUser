@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -94,6 +95,27 @@ public class UserService implements UserDetailsService {
     public User getUser(String username) {
         log.info("Fetching user {}",username);
         return userRepo.findByUsername(username);
+    }
+
+    public Integer addBalance(String phone, Integer addAmount){
+        User targetUser = userRepo.findByPhone(phone);
+        Integer currentBalance = targetUser.getAccountBalance();
+        Integer AfterCountBalance = currentBalance + addAmount;
+        targetUser.setAccountBalance(AfterCountBalance);
+        return AfterCountBalance;
+    }
+
+    public Integer reduceBalance(String phone, Integer addAmount){
+        User targetUser = userRepo.findByPhone(phone);
+        Integer currentBalance = targetUser.getAccountBalance();
+        Integer AfterCountBalance = currentBalance - addAmount;
+        if(AfterCountBalance>=0){
+            targetUser.setAccountBalance(AfterCountBalance);
+            return AfterCountBalance;
+        }else{
+            throw new RuntimeException("Your Balance have not enough money.");
+        }
+
     }
 
     public List<User> getAllUser(){
