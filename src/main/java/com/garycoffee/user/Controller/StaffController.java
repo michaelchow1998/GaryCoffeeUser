@@ -1,7 +1,7 @@
-package com.garycoffee.demo.Controller;
+package com.garycoffee.user.Controller;
 
-import com.garycoffee.demo.requestValid.RequestChangeBalance;
-import com.garycoffee.demo.service.UserService;
+import com.garycoffee.user.requestValid.RequestChangeBalance;
+import com.garycoffee.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

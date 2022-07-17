@@ -1,12 +1,11 @@
-package com.garycoffee.demo.model;
+package com.garycoffee.user.model;
 
-import com.garycoffee.demo.Enum.Sex;
+import com.garycoffee.user.Enum.Sex;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Date;
 
 @Entity
@@ -40,7 +39,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 30)
     private String email;
 
-    @Column(name = "phone", nullable = false, length = 20)
+    @Column(name = "phone", nullable = false, length = 20, unique = true)
     private String phone;
 
     @Column(name = "account_balance", nullable = false)

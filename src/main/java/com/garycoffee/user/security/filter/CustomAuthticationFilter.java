@@ -1,9 +1,9 @@
-package com.garycoffee.demo.security.filter;
+package com.garycoffee.user.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.garycoffee.demo.security.model.UsernameAndPasswordAuthRequest;
+import com.garycoffee.user.security.model.UsernameAndPasswordAuthRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

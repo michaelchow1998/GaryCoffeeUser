@@ -4,7 +4,7 @@
     <persistence-units>
       <persistence-unit name="GaryCoffee">
         <packages>
-          <package value="com.garycoffee.demo" />
+          <package value="com.garycoffee.user" />
         </packages>
       </persistence-unit>
     </persistence-units>

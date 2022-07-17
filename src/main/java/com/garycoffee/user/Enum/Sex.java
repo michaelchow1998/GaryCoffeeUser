@@ -1,4 +1,4 @@
-package com.garycoffee.demo.Enum;
+package com.garycoffee.user.Enum;
 
 public enum Sex {
     M,

@@ -1,10 +1,9 @@
-package com.garycoffee.demo.Controller;
+package com.garycoffee.user.Controller;
 
-import com.garycoffee.demo.model.User;
-import com.garycoffee.demo.requestValid.RequestChangeBalance;
-import com.garycoffee.demo.requestValid.RequestChangePw;
-import com.garycoffee.demo.requestValid.RequestUserCreate;
-import com.garycoffee.demo.service.UserService;
+import com.garycoffee.user.model.User;
+import com.garycoffee.user.requestValid.RequestChangePw;
+import com.garycoffee.user.requestValid.RequestUserCreate;
+import com.garycoffee.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UserController {
     //PUT: UPDATE User password
     @PutMapping("/changepw")
     public ResponseEntity<User> register(@RequestBody @Valid RequestChangePw request){
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/register").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/user/changepw").toUriString());
         return ResponseEntity.created(uri).body(userService.changePw(request));
     }
 

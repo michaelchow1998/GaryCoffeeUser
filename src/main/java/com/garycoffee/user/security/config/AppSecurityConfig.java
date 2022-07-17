@@ -1,7 +1,7 @@
-package com.garycoffee.demo.security.config;
+package com.garycoffee.user.security.config;
 
-import com.garycoffee.demo.security.filter.CustomAuthorizationFilter;
-import com.garycoffee.demo.security.filter.CustomAuthticationFilter;
+import com.garycoffee.user.security.filter.CustomAuthorizationFilter;
+import com.garycoffee.user.security.filter.CustomAuthticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,16 +1,9 @@
-package com.garycoffee.demo;
+package com.garycoffee.user;
 
-import com.garycoffee.demo.Enum.Sex;
-import com.garycoffee.demo.model.User;
-import com.garycoffee.demo.requestValid.RequestUserCreate;
-import com.garycoffee.demo.service.UserService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class GaryCoffeeApplication {

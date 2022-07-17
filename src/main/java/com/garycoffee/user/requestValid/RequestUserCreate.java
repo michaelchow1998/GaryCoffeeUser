@@ -1,7 +1,7 @@
-package com.garycoffee.demo.requestValid;
+package com.garycoffee.user.requestValid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.garycoffee.demo.Enum.Sex;
+import com.garycoffee.user.Enum.Sex;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

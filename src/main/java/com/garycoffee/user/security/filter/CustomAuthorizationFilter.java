@@ -1,4 +1,4 @@
-package com.garycoffee.demo.security.filter;
+package com.garycoffee.user.security.filter;
 
 
 import com.auth0.jwt.JWT;

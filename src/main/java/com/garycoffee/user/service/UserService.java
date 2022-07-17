@@ -1,10 +1,10 @@
-package com.garycoffee.demo.service;
+package com.garycoffee.user.service;
 
-import com.garycoffee.demo.model.User;
-import com.garycoffee.demo.repo.UserRepo;
+import com.garycoffee.user.model.User;
+import com.garycoffee.user.repo.UserRepo;
 
-import com.garycoffee.demo.requestValid.RequestChangePw;
-import com.garycoffee.demo.requestValid.RequestUserCreate;
+import com.garycoffee.user.requestValid.RequestChangePw;
+import com.garycoffee.user.requestValid.RequestUserCreate;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.Collection;

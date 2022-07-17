@@ -1,4 +1,4 @@
-package com.garycoffee.demo.requestValid;
+package com.garycoffee.user.requestValid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

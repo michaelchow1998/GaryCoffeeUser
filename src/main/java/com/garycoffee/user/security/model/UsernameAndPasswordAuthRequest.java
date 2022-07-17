@@ -1,4 +1,4 @@
-package com.garycoffee.demo.security.model;
+package com.garycoffee.user.security.model;
 
 import lombok.Getter;
 import lombok.Setter;
