@@ -22,7 +22,7 @@ public class ProductService {
 
     //Create Product
     public Product createProduct(Product product){
-        String uri = "http://localhost:8090/api/v1/products";
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products";
         Product targetProduct = webClientBuilder.build()
                 .post()
                 .uri(uri)
@@ -37,7 +37,7 @@ public class ProductService {
 
     //Get a Product by shortName
     public Product fetchProductByShortName(String shortName){
-        String uri = "http://localhost:8090/api/v1/products/" + shortName;
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products/" + shortName;
         log.info(uri);
         Product product = webClientBuilder.build()
                 .get()
@@ -52,7 +52,7 @@ public class ProductService {
 
     //Get All Products
     public List<Product> fetchProducts(){
-        String uri = "http://localhost:8090/api/v1/products";
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products";
         List productList = webClientBuilder.build()
                 .get()
                 .uri(uri)

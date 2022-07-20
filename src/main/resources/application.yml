@@ -1,8 +1,13 @@
+server:
+  port: $PORT
 spring:
   datasource:
-    password: s101033418
-    url: jdbc:mysql://localhost:3306/garycoffee?serverTimezone=Asia/Hong_Kong&characterEncoding=utf-8
-    username: root
+#    password: zx6666662
+#    url: jdbc:mysql://localhost:3306/garycoffee?serverTimezone=Asia/Hong_Kong&characterEncoding=utf-8
+#    username: root
+            password: e47a905b
+            url: jdbc:mysql://b9fb9c79dd98d5:e47a905b@us-cdbr-east-06.cleardb.net/heroku_a404af4b691d9cc?reconnect=true/garyCoffee?serverTimezone=Asia/Hong_Kong&characterEncoding=utf-8
+            username: b9fb9c79dd98d5
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8

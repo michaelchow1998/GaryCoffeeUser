@@ -22,7 +22,7 @@ public class AccountService {
     private WebClient.Builder webClientBuilder;
 
     public Account createAccount(CreateAccountRequest req){
-        String uri = "http://localhost:8070/api/v1/accounts/";
+        String uri = "https://gary-coffee-account.herokuapp.com/api/v1/accounts/";
         Account account = webClientBuilder.build()
                 .post()
                 .uri(uri)
@@ -37,7 +37,7 @@ public class AccountService {
 
 
     public Account checkAccountBalance(String phone){
-        String uri = "http://localhost:8070/api/v1/accounts/" + phone;
+        String uri = "https://gary-coffee-account.herokuapp.com/api/v1/accounts/" + phone;
         Account account = webClientBuilder.build()
                 .get()
                 .uri(uri)
@@ -49,7 +49,7 @@ public class AccountService {
     }
 
     public Account addAccountBalance(RequestChangeBalance req){
-        String uri = "http://localhost:8070/api/v1/accounts/addBalance";
+        String uri = "https://gary-coffee-account.herokuapp.com/api/v1/accounts/addBalance";
         Account account = webClientBuilder.build()
                 .put()
                 .uri(uri)

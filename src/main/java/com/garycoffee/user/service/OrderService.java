@@ -22,7 +22,7 @@ public class OrderService {
     private WebClient.Builder webClientBuilder;
 
     public Order createOrder(CreateOrderRequest order){
-        String uri = "http://localhost:8090/api/v1/orders";
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
         Order targetOrder = webClientBuilder.build()
                 .post()
                 .uri(uri)
@@ -36,7 +36,7 @@ public class OrderService {
 
     //Get All Orders
     public List<Order> fetchOrders(){
-        String uri = "http://localhost:8090/api/v1/orders";
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
         List orderList = webClientBuilder.build()
                 .get()
                 .uri(uri)
@@ -48,7 +48,7 @@ public class OrderService {
     }
 
     public Order fetchOrderById(String id){
-        String uri = "http://localhost:8090/api/v1/orders/" + id;
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders/" + id;
         Order order = webClientBuilder.build()
                 .get()
                 .uri(uri)
@@ -77,18 +77,18 @@ public class OrderService {
 
     public String processUri(String phone, Integer staffId, Integer page){
         String uri = "";
-        if(!phone.isBlank() | !staffId.equals(0)){
-            if (!phone.isBlank()) {
-                uri = "http://localhost:8090/api/v1/orders" +
+        if(!phone.isEmpty() | !staffId.equals(0)){
+            if (!phone.isEmpty()) {
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
                         "?phone="+phone +"&page=" + page;
 
             }
             if (!staffId.equals(0)) {
-                uri = "http://localhost:8090/api/v1/orders" +
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
                         "?staffId="+staffId +"&page=" + page;
             }
-            if(!phone.isBlank() & !staffId.equals(0)){
-                uri = "http://localhost:8090/api/v1/orders" +
+            if(!phone.isEmpty() & !staffId.equals(0)){
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
                         "?phone="+phone +"&page=" + page;
             }
         }else{
