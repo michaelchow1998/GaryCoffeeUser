@@ -25,7 +25,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-
 public class UserService implements UserDetailsService {
 
 
@@ -81,7 +80,6 @@ public class UserService implements UserDetailsService {
         regUser.setSex(user.getSex());
         regUser.setEmail(user.getEmail());
         regUser.setPhone(user.getPhone());
-        regUser.setAccountBalance(0);
         regUser.setKeyQuestionAns(user.getKeyQuestionAns());
         Date now = new Date();
         regUser.setCreatedAt(now);
@@ -96,26 +94,6 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public Integer addBalance(String phone, Integer addAmount){
-        User targetUser = userRepo.findByPhone(phone);
-        Integer currentBalance = targetUser.getAccountBalance();
-        Integer AfterCountBalance = currentBalance + addAmount;
-        targetUser.setAccountBalance(AfterCountBalance);
-        return AfterCountBalance;
-    }
-
-    public Integer reduceBalance(String phone, Integer addAmount){
-        User targetUser = userRepo.findByPhone(phone);
-        Integer currentBalance = targetUser.getAccountBalance();
-        Integer AfterCountBalance = currentBalance - addAmount;
-        if(AfterCountBalance>=0){
-            targetUser.setAccountBalance(AfterCountBalance);
-            return AfterCountBalance;
-        }else{
-            throw new RuntimeException("Your Balance have not enough money.");
-        }
-
-    }
 
     public List<User> getAllUser(){
         return userRepo.findAll();

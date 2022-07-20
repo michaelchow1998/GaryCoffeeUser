@@ -1,6 +1,9 @@
 package com.garycoffee.user.Controller;
 
-import com.garycoffee.user.requestValid.RequestChangeBalance;
+import com.garycoffee.user.dto.webclient.account.CreateAccountRequest;
+import com.garycoffee.user.dto.webclient.account.RequestChangeBalance;
+import com.garycoffee.user.requestModel.Account;
+import com.garycoffee.user.service.AccountService;
 import com.garycoffee.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -8,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -24,23 +24,26 @@ import javax.validation.Valid;
 public class StaffController {
 
     @Autowired
-    private UserService userService;
+    private AccountService accountService;
 
-    //PUT - ADD Balance to User
-    @PutMapping("/addBalance")
+    @PostMapping("/account")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
-    public ResponseEntity<Integer> addBalance
-            (@RequestBody @Valid RequestChangeBalance req){
-        Integer afterBalance = userService.addBalance(req.getPhone(), req.getAmount());
-        return ResponseEntity.ok().body(afterBalance);
+    public Account createAccount(@RequestBody CreateAccountRequest req){
+        return accountService.createAccount(req);
     }
 
-    //PUT - REDUCE Balance to User
-    @PutMapping("/reduceBalance")
+    @GetMapping("/account/{phone}")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
-    public ResponseEntity<Integer> reduceBalance
-            (@RequestBody @Valid RequestChangeBalance req){
-        Integer afterBalance = userService.reduceBalance(req.getPhone(), req.getAmount());
-        return ResponseEntity.ok().body(afterBalance);
+    public Account checkAccountBalance(
+            @PathVariable String phone){
+        return accountService.checkAccountBalance(phone);
     }
+
+    @PutMapping("/account")
+    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    public Account addAccountBalance(
+            @RequestBody RequestChangeBalance req){
+        return accountService.addAccountBalance(req);
+    }
+
 }

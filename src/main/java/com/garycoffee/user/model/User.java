@@ -42,8 +42,6 @@ public class User {
     @Column(name = "phone", nullable = false, length = 20, unique = true)
     private String phone;
 
-    @Column(name = "account_balance", nullable = false)
-    private Integer accountBalance;
 
     @Column(name = "key_question_ans", nullable = false, length = 20)
     private String keyQuestionAns;
