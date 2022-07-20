@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
-@RequestMapping("api/v1/guest")
+@RequestMapping("api/v1/staff")
 @RequiredArgsConstructor
 @Slf4j
 @Validated
