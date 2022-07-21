@@ -1,5 +1,5 @@
-server:
-  port: $PORT
+#server:
+#  port: $PORT
 spring:
   datasource:
 #    password: zx6666662

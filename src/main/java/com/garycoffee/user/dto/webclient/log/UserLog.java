@@ -11,7 +11,6 @@ import java.util.Date;
 @Setter
 public class UserLog {
 
-    @Id
     private String id;
 
     private String phone;

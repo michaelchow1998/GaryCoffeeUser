@@ -3,6 +3,7 @@ package com.garycoffee.user.service;
 import com.garycoffee.user.dto.webclient.log.ProductLog;
 import com.garycoffee.user.dto.webclient.log.UserLog;
 import com.garycoffee.user.requestModel.Order;
+import com.garycoffee.user.requestModel.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

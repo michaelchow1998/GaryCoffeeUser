@@ -11,7 +11,6 @@ import java.util.Date;
 @Setter
 public class ProductLog {
 
-    @Id
     private String id;
 
     @JsonProperty("staff_id")
