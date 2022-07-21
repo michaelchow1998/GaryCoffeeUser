@@ -3,6 +3,7 @@ package com.garycoffee.user.Controller;
 import com.garycoffee.user.dto.webclient.account.CreateAccountRequest;
 import com.garycoffee.user.dto.webclient.account.RequestChangeBalance;
 import com.garycoffee.user.dto.webclient.order.CreateOrderRequest;
+import com.garycoffee.user.dto.webclient.product.RequestUpdateList;
 import com.garycoffee.user.requestModel.Account;
 import com.garycoffee.user.requestModel.Order;
 import com.garycoffee.user.requestModel.Product;
@@ -88,6 +89,28 @@ public class StaffController {
         return ResponseEntity.ok().body(productList);
     }
 
+    @PutMapping("/products")
+    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    public ResponseEntity<List<Product>> refillProduct(
+            @RequestBody RequestUpdateList requestUpdateList
+    ){
+        List<Product> productList = productService.refillProduct(requestUpdateList);
+
+        return ResponseEntity.ok().body(productList);
+
+    }
+
+    @DeleteMapping("/products/{shortName}")
+    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    public ResponseEntity<String> deleteProduct(
+            @PathVariable String shortName
+    ){
+        String message = productService.deleteProduct(shortName);
+
+        return ResponseEntity.ok().body(message);
+
+    }
+
 
     //Orders APIs
     @PostMapping("/orders")
@@ -116,15 +139,17 @@ public class StaffController {
 
     @GetMapping("/orders/search")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
-    public ResponseEntity<List<Order>> fetchOrdersWithPage(
+    public ResponseEntity<Page<Order>> fetchOrdersWithPage(
             @RequestParam (value = "phone", defaultValue = "", required = false) String phone,
             @RequestParam (value = "staffId", defaultValue = "0",required = false) Integer staffId,
             @RequestParam (value = "page", defaultValue = "1") Integer page
     ){
 
-        List<Order> orderList = orderService.fetchOrdersWithPage(phone,staffId,page);
+        Page<Order> orderList = orderService.fetchOrdersWithPage(phone,staffId,page);
 
         return ResponseEntity.ok().body(orderList);
 
     }
+
+
 }

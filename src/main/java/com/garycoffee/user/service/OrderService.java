@@ -5,6 +5,8 @@ import com.garycoffee.user.requestModel.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class OrderService {
 
     public Order createOrder(CreateOrderRequest order){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
-        Order targetOrder = webClientBuilder.build()
+        return webClientBuilder.build()
                 .post()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -31,49 +33,47 @@ public class OrderService {
                 .retrieve()
                 .bodyToMono(Order.class)
                 .block();
-        return targetOrder;
     }
 
     //Get All Orders
     public List<Order> fetchOrders(){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
-        List orderList = webClientBuilder.build()
+        return webClientBuilder.build()
                 .get()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
-                .bodyToMono(List.class)
+                .bodyToMono(new ParameterizedTypeReference<List<Order>>(){})
                 .block();
-        return orderList;
     }
 
     public Order fetchOrderById(String id){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders/" + id;
-        Order order = webClientBuilder.build()
+
+        return webClientBuilder.build()
                 .get()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
                 .bodyToMono(Order.class)
                 .block();
-
-        return order;
     }
 
-    public List<Order> fetchOrdersWithPage(String phone, Integer staffId, Integer page){
+    public Page<Order> fetchOrdersWithPage(String phone, Integer staffId, Integer page){
 
         String uri = processUri(phone,staffId,page);
         log.info(uri);
 
-        List orderList = webClientBuilder.build()
+        return webClientBuilder.build()
                 .get()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
-                .bodyToMono(List.class)
+                .bodyToMono(new ParameterizedTypeReference<Page<Order>>(){})
                 .block();
-        return orderList;
     }
+
+
 
     public String processUri(String phone, Integer staffId, Integer page){
         String uri = "";
