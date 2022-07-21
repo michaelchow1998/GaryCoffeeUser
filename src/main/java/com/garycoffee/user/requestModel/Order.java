@@ -1,5 +1,6 @@
 package com.garycoffee.user.requestModel;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,7 @@ public class Order {
 
     private Boolean isUseIntegral;
 
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     private List<OrderItem> orderItemList;

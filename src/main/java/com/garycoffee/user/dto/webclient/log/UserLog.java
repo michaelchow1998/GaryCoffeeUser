@@ -1,5 +1,6 @@
 package com.garycoffee.user.dto.webclient.log;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,7 @@ public class UserLog {
     private String message;
 
     @JsonProperty("modified_date")
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifiedDate;
 
 }
