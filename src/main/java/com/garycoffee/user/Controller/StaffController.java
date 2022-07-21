@@ -68,7 +68,7 @@ public class StaffController {
 
     //Product APIs
     @PostMapping("/products")
-    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<Product> createProduct(@RequestBody Product product){
         Product targetProduct = productService.createProduct(product);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/staff/products").toUriString());
@@ -101,7 +101,7 @@ public class StaffController {
     }
 
     @DeleteMapping("/products/{shortName}")
-    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     public ResponseEntity<String> deleteProduct(
             @PathVariable String shortName
     ){
