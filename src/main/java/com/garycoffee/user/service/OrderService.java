@@ -4,6 +4,7 @@ import com.garycoffee.user.dto.webclient.order.CreateOrderRequest;
 import com.garycoffee.user.requestModel.Order;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
@@ -25,14 +26,22 @@ public class OrderService {
 
     public Order createOrder(CreateOrderRequest order){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
-        return webClientBuilder.build()
-                .post()
-                .uri(uri)
-                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .body(Mono.just(order), Order.class)
-                .retrieve()
-                .bodyToMono(Order.class)
-                .block();
+        Order createdOrder = new Order();
+        try{
+             createdOrder = webClientBuilder.build()
+                    .post()
+                    .uri(uri)
+                    .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                    .body(Mono.just(order), Order.class)
+                    .retrieve()
+                    .bodyToMono(Order.class)
+                    .block();
+        }catch (ServiceException se){
+            log.warn("Error: "+ se.getMessage());
+        }catch(Exception e){
+            log.error(e.getMessage());
+        }
+        return createdOrder;
     }
 
     //Get All Orders
