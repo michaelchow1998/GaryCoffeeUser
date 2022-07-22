@@ -26,9 +26,8 @@ public class OrderService {
 
     public Order createOrder(CreateOrderRequest order){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders";
-        Order createdOrder = new Order();
         try{
-             createdOrder = webClientBuilder.build()
+             return  webClientBuilder.build()
                     .post()
                     .uri(uri)
                     .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +40,7 @@ public class OrderService {
         }catch(Exception e){
             log.error(e.getMessage());
         }
-        return createdOrder;
+        return null;
     }
 
     //Get All Orders

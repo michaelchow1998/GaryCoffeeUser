@@ -116,9 +116,15 @@ public class StaffController {
     @PostMapping("/orders")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
     public ResponseEntity<Order> createOrder(@RequestBody CreateOrderRequest order){
-        Order targetOrder = orderService.createOrder(order);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/staff/orders").toUriString());
-        return ResponseEntity.created(uri).body(targetOrder);
+            Order targetOrder = orderService.createOrder(order);
+            if(targetOrder!=null){
+                URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/staff/orders").toUriString());
+                return ResponseEntity.created(uri).body(targetOrder);
+            }else {
+                throw new RuntimeException("Stock may not error to sell");
+            }
+
+
     }
 
     //Get All Orders
