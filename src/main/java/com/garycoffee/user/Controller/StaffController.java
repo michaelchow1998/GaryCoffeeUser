@@ -56,6 +56,13 @@ public class StaffController {
         return ResponseEntity.ok().body(account);
     }
 
+    @GetMapping("/account/exists/{phone}")
+    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    public ResponseEntity<Boolean> checkAccountExits(
+            @PathVariable String phone){
+        Boolean exists = accountService.checkAccountExits(phone);
+        return ResponseEntity.ok().body(exists);
+    }
     //Add account Balance
     @PutMapping("/account")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")

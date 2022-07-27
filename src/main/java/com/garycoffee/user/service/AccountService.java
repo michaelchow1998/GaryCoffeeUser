@@ -48,6 +48,18 @@ public class AccountService {
         return account;
     }
 
+    public Boolean checkAccountExits(String phone){
+        String uri = "https://gary-coffee-account.herokuapp.com/api/v1/accounts/exists/" + phone;
+        Boolean exists = webClientBuilder.build()
+                .get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(Boolean.class)
+                .block();
+
+        return exists;
+    }
+
     public Account addAccountBalance(RequestChangeBalance req){
         String uri = "https://gary-coffee-account.herokuapp.com/api/v1/accounts/addBalance";
         Account account = webClientBuilder.build()
