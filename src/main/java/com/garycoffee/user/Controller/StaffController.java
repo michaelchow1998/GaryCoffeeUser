@@ -20,6 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.annotation.Resource;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -58,10 +59,13 @@ public class StaffController {
 
     @GetMapping("/account/exists/{phone}")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
-    public ResponseEntity<Boolean> checkAccountExits(
+    public ResponseEntity<HashMap<String,Boolean>> checkAccountExits(
             @PathVariable String phone){
+        HashMap<String,Boolean> existsMap = new HashMap<>();
         Boolean exists = accountService.checkAccountExits(phone);
-        return ResponseEntity.ok().body(exists);
+        existsMap.put("exists",exists);
+
+        return ResponseEntity.ok().body(existsMap);
     }
     //Add account Balance
     @PutMapping("/account")
