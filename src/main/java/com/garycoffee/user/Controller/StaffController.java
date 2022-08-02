@@ -4,6 +4,7 @@ import com.garycoffee.user.dto.webclient.account.CreateAccountRequest;
 import com.garycoffee.user.dto.webclient.account.RequestChangeBalance;
 import com.garycoffee.user.dto.webclient.order.CreateOrderRequest;
 import com.garycoffee.user.dto.webclient.product.RequestUpdateList;
+import com.garycoffee.user.dto.webclient.product.RequestUpdateProduct;
 import com.garycoffee.user.requestModel.Account;
 import com.garycoffee.user.requestModel.Order;
 import com.garycoffee.user.requestModel.Product;
@@ -105,9 +106,21 @@ public class StaffController {
     public ResponseEntity<List<Product>> refillProduct(
             @RequestBody RequestUpdateList requestUpdateList
     ){
-        List<Product> productList = productService.refillProduct(requestUpdateList);
+        List<Product> productList = productService.refillProducts(requestUpdateList);
 
         return ResponseEntity.ok().body(productList);
+
+    }
+
+    @PutMapping("/products/{shortName}")
+    @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
+    public ResponseEntity<Product> refillSingleProduct(
+            @PathVariable String shortName,
+            @RequestBody RequestUpdateProduct requestUpdateProduct
+    ){
+        Product product = productService.refillSingleProduct(requestUpdateProduct);
+
+        return ResponseEntity.ok().body(product);
 
     }
 

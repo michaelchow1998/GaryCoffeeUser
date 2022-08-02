@@ -1,6 +1,7 @@
 package com.garycoffee.user.service;
 
 import com.garycoffee.user.dto.webclient.product.RequestUpdateList;
+import com.garycoffee.user.dto.webclient.product.RequestUpdateProduct;
 import com.garycoffee.user.requestModel.Product;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -62,7 +63,7 @@ public class ProductService {
                 .block();
     }
 
-    public List<Product> refillProduct(RequestUpdateList requestUpdateList){
+    public List<Product> refillProducts(RequestUpdateList requestUpdateList){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products";
 
         return webClientBuilder.build()
@@ -74,6 +75,20 @@ public class ProductService {
                 .bodyToMono(new ParameterizedTypeReference<List<Product>>(){})
                 .block();
     }
+
+    public Product refillSingleProduct(RequestUpdateProduct requestUpdateProduct){
+        String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products/"+requestUpdateProduct.getShortName();
+
+        return webClientBuilder.build()
+                .put()
+                .uri(uri)
+                .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+                .body(Mono.just(requestUpdateProduct), Product.class)
+                .retrieve()
+                .bodyToMono(Product.class)
+                .block();
+    }
+
 
     public String deleteProduct(String shortName){
         String uri = "https://gary-coffee-orders.herokuapp.com/api/v1/products/" +shortName;
