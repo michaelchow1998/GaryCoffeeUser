@@ -1,6 +1,7 @@
 package com.garycoffee.user.requestModel;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +9,9 @@ import lombok.Setter;
 @Setter
 public class OrderItem {
 
-    private String productShortName;
+
     private Integer quantity;
     private Integer amount;
-
+    @JsonProperty("product_short_name")
+    private String productShortName;
 }

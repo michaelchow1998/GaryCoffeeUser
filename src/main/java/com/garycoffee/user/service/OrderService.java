@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+
 import java.util.List;
 
 @Service
@@ -67,18 +68,19 @@ public class OrderService {
                 .block();
     }
 
-    public Page<Order> fetchOrdersWithPage(String phone, Integer staffId, Integer page){
+    public  Object fetchOrdersWithPage(String phone, Integer staffId, Integer page){
 
         String uri = processUri(phone,staffId,page);
         log.info(uri);
 
-        return webClientBuilder.build()
+        return  webClientBuilder.build()
                 .get()
                 .uri(uri)
                 .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Page<Order>>(){})
+                .bodyToMono(Object.class)
                 .block();
+
     }
 
 
@@ -87,16 +89,16 @@ public class OrderService {
         String uri = "";
         if(!phone.isEmpty() | !staffId.equals(0)){
             if (!phone.isEmpty()) {
-                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders/search" +
                         "?phone="+phone +"&page=" + page;
 
             }
             if (!staffId.equals(0)) {
-                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders/search" +
                         "?staffId="+staffId +"&page=" + page;
             }
             if(!phone.isEmpty() & !staffId.equals(0)){
-                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders" +
+                uri = "https://gary-coffee-orders.herokuapp.com/api/v1/orders/search" +
                         "?phone="+phone +"&page=" + page;
             }
         }else{

@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
 import javax.annotation.Resource;
 import java.net.URI;
 import java.util.HashMap;
@@ -169,13 +170,13 @@ public class StaffController {
 
     @GetMapping("/orders/search")
     @PreAuthorize("hasAnyRole('ROLE_STAFF','ROLE_ADMIN')")
-    public ResponseEntity<Page<Order>> fetchOrdersWithPage(
+    public ResponseEntity<Object> fetchOrdersWithPage(
             @RequestParam (value = "phone", defaultValue = "", required = false) String phone,
             @RequestParam (value = "staffId", defaultValue = "0",required = false) Integer staffId,
             @RequestParam (value = "page", defaultValue = "1") Integer page
     ){
 
-        Page<Order> orderList = orderService.fetchOrdersWithPage(phone,staffId,page);
+        Object orderList = orderService.fetchOrdersWithPage(phone,staffId,page);
 
         return ResponseEntity.ok().body(orderList);
 
